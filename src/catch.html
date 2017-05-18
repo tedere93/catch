@@ -7,16 +7,28 @@
 <body>
 	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="400" height="500">
 	</svg>
+	<br>
+	<button onclick="move()">Move</button>
+	<button onclick="move2()">Move</button>
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
-circle = paper.circle(100, 50, 30);
-circle2 = paper.circle(170,50,30);
+var circle = paper.circle(100, 50, 30);
+var circle2 = paper.circle(170,50,30);
+var rect1 = paper.rect(10,10,25,25,3);
       
 function changeSize(){
-   	circle.animate({r:40},1000,mina.bounce,function(){
-    circle.animate({r:10},1000,mina.bounce,changeSize);
+   	circle.animate({r:40},1000,mina.elastic,function(){
+    circle.animate({r:15},3000,mina.elastic,changeSize);
     });
 }
+
+function move(){
+	rect1.transform("t10,100r25");
+}
+function move2(){
+	rect1.transform("t10,100");
+}
+
 changeSize();
 
 </script>
