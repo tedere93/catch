@@ -9,10 +9,15 @@
 	</svg>
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
-      circle = paper.circle(100, 50, 30);
-      circle2 = paper.circle(170,50,30);
+circle = paper.circle(100, 50, 30);
+circle2 = paper.circle(170,50,30);
       
-      
+function changeSize(){
+   	circle.animate({r:40},1000,mina.bounce,function(){
+    circle.animate({r:10},1000,mina.bounce,changeSize);
+    });
+}
+changeSize();
 
 </script>
 </body>
