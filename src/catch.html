@@ -9,7 +9,8 @@
 	</svg>
 	<br>
 	<button onclick="move()">Move</button>
-	<button onclick="move2()">Move</button>
+	<button onclick="stop()">Stop</button>
+	<button onclick="delete1()">Delete</button>
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
 var circle = paper.circle(100, 50, 30);
@@ -22,11 +23,19 @@ function changeSize(){
     });
 }
 
+function delete1(){
+	circle.remove();
+}
+
+function stop(){
+	circle.stop();
+}
+
 function move(){
 	rect1.transform("t10,100r25");
 }
 function move2(){
-	rect1.transform("t10,100");
+	rect1.transform("t10,10");
 }
 
 changeSize();
