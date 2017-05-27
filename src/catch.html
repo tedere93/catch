@@ -16,8 +16,16 @@
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
 
-var circle2 = paper.circle(170,50,30);
-var rect1 = paper.rect(10,10,25,25,3);
+var img = paper.image('image.jpg', 10,10,300,300);
+bigCircle = paper.circle(150,150,100);
+bigCircle.attr('fill',"#fff");
+img.attr({
+	mask: bigCircle
+});
+
+
+
+// var rect1 = paper.rect(10,10,25,25,3);
       
 function changeSize(){
    	circle.animate({r:40},1000,mina.elastic,function(){
