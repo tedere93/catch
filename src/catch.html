@@ -12,9 +12,10 @@
 var paper = Snap('#complexSVGfromIllustrator');
 
 class Circle {
-        constructor(){
+        constructor(color){
           // this.id = id;
           this.id = paper.circle(40,40,30);
+          this.id.attr('fill',color);
         }
         falling(){                              /*MERGE SI ASA CA MAI JOS*/
           this.id.animate({transform:"t0,300"},3500,mina.bounce,this.fail);
@@ -33,7 +34,17 @@ class Circle {
         for(var i = 0; i < 11; i++) {
           theID += possible.charAt(Math.floor(Math.random() * 62));
         }
-      	theID = new Circle();
+        var rnd = Math.random();
+        if(rnd<=0.3){
+          theID = new Circle("green");
+        }
+        else if(rnd>0.3 && rnd<=0.7){
+          theID = new Circle("red");
+        }
+        else {
+        	theID = new Circle("blue");
+        }
+      	// theID = new Circle();
       	theID.falling();
       }
 
