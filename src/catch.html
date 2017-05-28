@@ -5,26 +5,35 @@
 	<script src="js/snap.svg-min.js"></script>
 </head>
 <body>
+	<p id="score">0</p>
+	<br>
 	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="400" height="500">
 	</svg>
 	<br>
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
-
+var score = 0;
 class Circle {
         constructor(color){
           // this.id = id;
           this.id = paper.circle(40,40,30);
           this.id.attr('fill',color);
+          console.log(color);
         }
-        falling(){                              /*MERGE SI ASA CA MAI JOS*/
+        falling(color2){                              /*MERGE SI ASA CA MAI JOS*/
           this.id.animate({transform:"t0,300"},3500,mina.bounce,this.fail);
           this.id.mouseover(function(){ /*<----MERGE SI ASA*/
             this.remove();
-          });
+            score++;
+            document.getElementById("score").innerHTML = score;
+            
+            });
         }
         fail(){
           this.remove();
+        }
+        check(){
+        	
         }
       }
 
@@ -34,7 +43,8 @@ class Circle {
         for(var i = 0; i < 11; i++) {
           theID += possible.charAt(Math.floor(Math.random() * 62));
         }
-        var rnd = Math.random();
+        console.log(theID);
+		var rnd = Math.random();
         if(rnd<=0.3){
           theID = new Circle("green");
         }
@@ -46,7 +56,9 @@ class Circle {
         }
       	// theID = new Circle();
       	theID.falling();
+		// console.log(theID);
       }
+
 
       newCerc();
       window.setInterval(newCerc,3000);
