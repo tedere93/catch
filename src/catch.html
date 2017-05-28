@@ -18,12 +18,10 @@ class Circle {
         }
         falling(){                              /*MERGE SI ASA CA MAI JOS*/
           this.id.animate({transform:"t0,300"},3500,mina.bounce,this.id.remove);
-          
+          this.id.mouseover(function(){ /*<----MERGE SI ASA*/
+            this.remove();
+          });
         }
-
-        
-
-        //========================================================================================== AGUNWAGUNWAUGNAWGUAWN MERGE!!!!!! <3 <3 <3  ========= =====================================================================//
       }
 
       function newCerc(){
