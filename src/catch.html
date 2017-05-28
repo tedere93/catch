@@ -8,51 +8,30 @@
 	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="400" height="500">
 	</svg>
 	<br>
-	<button onclick="move()">Move</button>
-	<button onclick="createCircle()">Create</button>
-	<button onclick="changeSize()">Animate</button>
-	<button onclick="stop()">Stop</button>
-	<button onclick="delete1()">Delete</button>
 <script type="text/javascript">
 var paper = Snap('#complexSVGfromIllustrator');
 
-var img = paper.image('image.jpg', 10,10,300,300);
-bigCircle = paper.circle(150,150,100);
-bigCircle.attr('fill',"#fff");
-img.attr({
-	mask: bigCircle
-});
+class Circle {
+        constructor(){
+          // this.id = id;
+          this.id = paper.circle(40,40,30);
+        }
+        falling(){                              /*MERGE SI ASA CA MAI JOS*/
+          this.id.animate({transform:"t0,300"},3500,mina.bounce,this.id.remove);
+          
+        }
 
+        
 
+        //========================================================================================== AGUNWAGUNWAUGNAWGUAWN MERGE!!!!!! <3 <3 <3  ========= =====================================================================//
+      }
 
-// var rect1 = paper.rect(10,10,25,25,3);
-      
-function changeSize(){
-   	circle.animate({r:40},1000,mina.elastic,function(){
-    circle.animate({r:15},3000,mina.elastic,changeSize);
-    });
-}
+      function newCerc(){
+      	circle1 = new Circle();
+      	circle1.falling();
+      }
 
-function createCircle(){
-	circle = paper.circle(100, 50, 30);
-}
-
-function delete1(){
-	circle.remove();
-}
-
-function stop(){
-	circle.stop();
-}
-
-function move(){
-	rect1.transform("t10,100r25");
-}
-function move2(){
-	rect1.transform("t10,10");
-}
-
-
+      newCerc();
 </script>
 </body>
 </html>
