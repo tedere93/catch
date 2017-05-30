@@ -6,6 +6,8 @@
 </head>
 <body>
 	<p id="score">0</p>
+	<button onclick="THESTOP()">STOOOOOOOOP</button>
+	<button onclick="start()">STAAAAART</button>
 	<br>
 	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="900" height="1300">
 
@@ -77,7 +79,14 @@ class Circle {
 
 
       newCerc();
-      window.setInterval(newCerc,3000);
+      var myVar;
+      function THESTOP(){
+      	clearInterval(myVar);
+      }
+      function start(){
+      	myVar = window.setInterval(newCerc,3000);
+      }
+      start();
 </script>
 <style type="text/css">
 	html, body, div, span, applet, object, iframe,
