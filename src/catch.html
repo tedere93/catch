@@ -3,24 +3,28 @@
 <head>
 	<title>Catch!</title>
 	<script src="js/snap.svg-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/catch.css">
 </head>
 <body>
 	<p id="score">0</p>
-	<button onclick="THESTOP()">STOOOOOOOOP</button>
-	<button onclick="start()">STAAAAART</button>
+	<button id="thestop" onclick="THESTOP()" style="display:none">STOOOOOOOOP</button>
+	<button id="thestart" onclick="start()">STAAAAART</button>
 	<br>
 	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="900" height="1300">
 
 	</svg>
 	<br>
 <script type="text/javascript">
-
-var paper = Snap('#complexSVGfromIllustrator');
-var background = paper.rect(0,0,900,1300);
-background.attr("fill","yellow");
-// background.scale(paper.width,paper.height);
-var score = 0;
-class Circle {
+	var Wrong = new Audio('Wrong.mp3');
+	var Dropped = new Audio('Dropped.mp3');
+	
+	var paper = Snap('#complexSVGfromIllustrator');
+	var background = paper.rect(0,0,900,1300);
+	background.attr("fill","yellow");
+	// background.scale(paper.width,paper.height);
+	var score = 0;
+	var culoare = null;
+	class Circle {
         constructor(color,x){
           // this.id = id;
           this.id = paper.circle(x,80,80);
@@ -29,92 +33,73 @@ class Circle {
         }
         falling(){                              /*MERGE SI ASA CA MAI JOS*/
           this.id.animate({transform:"t0,1140"},3500,mina.linear,this.fail);
-          var culoare = this.id.attr("fill");
+          culoare = this.id.attr("fill");
           this.id.touchstart(function(){ /*<----MERGE SI ASA*/
             this.remove();
-            score++;
-            document.getElementById("score").innerHTML = score;
             if(culoare == "rgb(0, 0, 255)"){
             	console.log("blue");
+            	score++;
+	            document.getElementById("score").innerHTML = score;
             }
             else if (culoare == "rgb(0, 128, 0)"){
             	console.log("green");
             	navigator.vibrate(1000);
+            	Wrong.play();
             }else if (culoare == "rgb(255, 0, 0)"){
             	console.log("red");
+            	score++;
+	            document.getElementById("score").innerHTML = score;
+	            // +sunet!
             }
             });
         }
         fail(){
           this.remove();
+          console.log(culoare);
+          
         }
         check(){
         	
         }
       }
 
-      function newCerc(){
-      	var theID = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for(var i = 0; i < 11; i++) {
-          theID += possible.charAt(Math.floor(Math.random() * 62));
-        }
-        console.log(theID);
-		var rnd = Math.random();
-		console.log(rnd);
-		var theX = Math.floor(Math.random()*(820-80+1)+80);
-        if(rnd<=0.3){
-          theID = new Circle("green",theX);
-        }
-        else if(rnd>0.3 && rnd<=0.7){
-          theID = new Circle("red",theX);
-        }
-        else {
-        	theID = new Circle("blue",theX);
-        }
-      	// theID = new Circle();
-      	theID.falling();
-		// console.log(theID);
-      }
+  function newCerc(){
+  	var theID = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(var i = 0; i < 11; i++) {
+      theID += possible.charAt(Math.floor(Math.random() * 62));
+    }
+    console.log(theID);
+	var rnd = Math.random();
+	console.log(rnd);
+	var theX = Math.floor(Math.random()*(820-80+1)+80);
+    if(rnd<=0.3){
+      theID = new Circle("green",theX);
+    }
+    else if(rnd>0.3 && rnd<=0.7){
+      theID = new Circle("red",theX);
+    }
+    else {
+    	theID = new Circle("blue",theX);
+    }
+  	// theID = new Circle();
+  	theID.falling();
+	// console.log(theID);
+  }
 
+  var myVar;
+  function THESTOP(){
+  	clearInterval(myVar);
+  	document.getElementById("thestart").style.display = "inline";
+  	document.getElementById("thestop").style.display = "none";
+  }
+  function start(){
+  	myVar = window.setInterval(newCerc,3000);
+  	document.getElementById("thestart").style.display = "none";
+  	document.getElementById("thestop").style.display = "inline";
+  }
 
-      newCerc();
-      var myVar;
-      function THESTOP(){
-      	clearInterval(myVar);
-      }
-      function start(){
-      	myVar = window.setInterval(newCerc,3000);
-      }
-      start();
 </script>
-<style type="text/css">
-	html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-	svg {
-		position:absolute;
-		left:0;
-		right:0;
-		margin:auto;
-	}
-</style>
+
 </body>
 </html>
