@@ -35,7 +35,7 @@
           this.id.touchstart(function(){ /*<----MERGE SI ASA*/
           	this.stop();
             this.remove();
-            if(culoare == "rgb(0, 0, 255)"){
+            if(culoare == "rgb(0, 0, 255)" || culoare == "rgb(255, 0, 0)"){
             	// console.log("blue");
             	score++;
 	            // document.getElementById("score").innerHTML = score;
@@ -43,19 +43,13 @@
             else if (culoare == "rgb(0, 128, 0)"){
             	// console.log("green");
             	navigator.vibrate(1000);
+            	score--;
             	Wrong.play();
-            }else if (culoare == "rgb(255, 0, 0)"){
-            	// console.log("red");
-            	score++;
-	            // document.getElementById("score").innerHTML = score;
-	            // +sunet!
             }
-            });
+          });
         }
         fail(){
           this.remove();
-       //    var culoare = this.attr("fill");
-	      // console.log(culoare);
 	      var culoare2 = this.attr();
 	      console.log(culoare2.fill);
 	      if (culoare2.fill=="#0000ff" || culoare2.fill=="#ff0000"){
@@ -74,26 +68,23 @@
           // }
           
         }
-        check(){
-        	
-        }
-      }
+    }
 
-  function newCerc(){
+  	function newCerc(){
   	var theID = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for(var i = 0; i < 11; i++) {
-      theID += possible.charAt(Math.floor(Math.random() * 62));
-    }
+	for(var i = 0; i < 11; i++) {
+	    theID += possible.charAt(Math.floor(Math.random() * 62));
+	}
     console.log(theID);
 	var rnd = Math.random();
 	console.log(rnd);
 	var theX = Math.floor(Math.random()*(820-80+1)+80);
     if(rnd<=0.3){
-      theID = new Circle("green",theX);
+      	theID = new Circle("green",theX);
     }
     else if(rnd>0.3 && rnd<=0.7){
-      theID = new Circle("red",theX);
+      	theID = new Circle("red",theX);
     }
     else {
     	theID = new Circle("blue",theX);
@@ -101,20 +92,38 @@
   	// theID = new Circle();
   	theID.falling();
 	// console.log(theID);
-  }
+	}
 
-  var myVar;
-  function THESTOP(){
-  	clearInterval(myVar);
-  	// document.getElementById("thestart").style.display = "inline";
-  	// document.getElementById("thestop").style.display = "none";
-  }
-  function start(){
-  	myVar = window.setInterval(newCerc,3000);
-  	// document.getElementById("thestart").style.display = "none";
-  	// document.getElementById("thestop").style.display = "inline";
-  }
-  start();
+	var myVar;
+	function THESTOP(){
+		clearInterval(myVar);
+	  	// document.getElementById("thestart").style.display = "inline";
+	  	// document.getElementById("thestop").style.display = "none";
+	}
+	function start(){
+	  	myVar = window.setInterval(newCerc,3000);
+	  	// document.getElementById("thestart").style.display = "none";
+	  	// document.getElementById("thestop").style.display = "inline";
+	}
+	function intro(){
+		var text = '3 2 1 GO!';
+		var textArray = text.split(" ");
+		var len = textArray.length;
+		var timing = 750;
+		for( var index=0; index < len; index++ ) {
+			(function() {
+				var svgTextElement = paper.text(490,500, textArray[index]).attr({ fontSize: '120px', opacity: 0, "text-anchor": "middle" });
+				setTimeout( function() {
+					Snap.animate( 0, 2, function( value ) {
+                    svgTextElement.attr({ 'font-size': value * 100,  opacity: value });
+                	}, timing, mina.bounce, function() { svgTextElement.remove() } );
+                    }
+        		,index * timing)
+    		}());
+		}
+	}
+  	intro();
+ 	start();
 </script>
 
 </body>
