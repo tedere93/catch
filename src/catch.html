@@ -20,7 +20,8 @@
 	var paper = Snap('#complexSVGfromIllustrator');
 	var background = paper.rect(0,0,"100%","100%");
 	background.attr("fill","yellow");
-	// background.scale(paper.width,paper.height);
+	var startButton = paper.circle(150,150,70);
+	startButton.touchstart(start);
 	var score = 0;
 	class Circle {
         constructor(color,x){
@@ -101,7 +102,9 @@
 	  	// document.getElementById("thestop").style.display = "none";
 	}
 	function start(){
+	  	intro();
 	  	myVar = window.setInterval(newCerc,3000);
+
 	  	// document.getElementById("thestart").style.display = "none";
 	  	// document.getElementById("thestop").style.display = "inline";
 	}
@@ -122,8 +125,8 @@
     		}());
 		}
 	}
-  	intro();
- 	start();
+  	// intro();
+ 	// start();
 </script>
 
 </body>
