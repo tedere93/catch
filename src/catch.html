@@ -98,10 +98,13 @@
 	var myVar;
 	function THESTOP(){
 		clearInterval(myVar);
+		startButton = paper.circle(150,150,70);
+		startButton.touchstart(start);
 	  	// document.getElementById("thestart").style.display = "inline";
 	  	// document.getElementById("thestop").style.display = "none";
 	}
 	function start(){
+		startButton.remove();
 	  	intro();
 	  	myVar = window.setInterval(newCerc,3000);
 
