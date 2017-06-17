@@ -6,25 +6,22 @@
 	<link rel="stylesheet" type="text/css" href="css/catch.css">
 </head>
 <body>
-	<p id="score">0</p>
-	<button id="thestop" onclick="THESTOP()" style="display:none">STOOOOOOOOP</button>
-	<button id="thestart" onclick="start()">STAAAAART</button>
-	<br>
-	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" width="900" height="1300">
-
+	<!-- <p id="score">0</p> -->
+	<svg id='complexSVGfromIllustrator' version="1.1" xmlns="http://www.w3.org/2000/svg" >
 	</svg>
-	<br>
+	<!-- <br> -->
+	<!-- <button id="thestop" onclick="THESTOP()" style="display:none">STOOOOOOOOP</button> -->
+	<!-- <button id="thestart" onclick="start()">STAAAAART</button> -->
 <script type="text/javascript">
 	var Wrong = new Audio('sounds/Wrong.mp3');
 	var Dropped = new Audio('sounds/Dropped.mp3');
 	var Over = new Audio('sounds/Over.mp3')
 	
 	var paper = Snap('#complexSVGfromIllustrator');
-	var background = paper.rect(0,0,900,1300);
+	var background = paper.rect(0,0,"100%","100%");
 	background.attr("fill","yellow");
 	// background.scale(paper.width,paper.height);
 	var score = 0;
-	var culoare = null;
 	class Circle {
         constructor(color,x){
           // this.id = id;
@@ -33,30 +30,48 @@
           // console.log(this.id.attr('fill'));
         }
         falling(){                              /*MERGE SI ASA CA MAI JOS*/
-          this.id.animate({transform:"t0,1140"},3500,mina.linear,this.fail);
-          culoare = this.id.attr("fill");
+          this.id.animate({transform:"t0,1600"},3500,mina.linear,this.fail);
+          var culoare = this.id.attr("fill");
           this.id.touchstart(function(){ /*<----MERGE SI ASA*/
+          	this.stop();
             this.remove();
             if(culoare == "rgb(0, 0, 255)"){
-            	console.log("blue");
+            	// console.log("blue");
             	score++;
-	            document.getElementById("score").innerHTML = score;
+	            // document.getElementById("score").innerHTML = score;
             }
             else if (culoare == "rgb(0, 128, 0)"){
-            	console.log("green");
+            	// console.log("green");
             	navigator.vibrate(1000);
             	Wrong.play();
             }else if (culoare == "rgb(255, 0, 0)"){
-            	console.log("red");
+            	// console.log("red");
             	score++;
-	            document.getElementById("score").innerHTML = score;
+	            // document.getElementById("score").innerHTML = score;
 	            // +sunet!
             }
             });
         }
         fail(){
           this.remove();
-          console.log(culoare);
+       //    var culoare = this.attr("fill");
+	      // console.log(culoare);
+	      var culoare2 = this.attr();
+	      console.log(culoare2.fill);
+	      if (culoare2.fill=="#0000ff" || culoare2.fill=="#ff0000"){
+	      	Dropped.play();
+	      }
+          // if(culoare=="rgb(0, 0, 255)"){
+          // 	score--;
+          // 	Dropped.play();
+          // }
+          // else if(culoare == "rgb(0, 128, 0)"){
+          // 	//gj dont get that
+          // }
+          // else if(culoare == "rgb(255, 0, 0)"){
+          // 	// score --;
+          // 	// Dropped.play();
+          // }
           
         }
         check(){
@@ -91,15 +106,15 @@
   var myVar;
   function THESTOP(){
   	clearInterval(myVar);
-  	document.getElementById("thestart").style.display = "inline";
-  	document.getElementById("thestop").style.display = "none";
+  	// document.getElementById("thestart").style.display = "inline";
+  	// document.getElementById("thestop").style.display = "none";
   }
   function start(){
   	myVar = window.setInterval(newCerc,3000);
-  	document.getElementById("thestart").style.display = "none";
-  	document.getElementById("thestop").style.display = "inline";
+  	// document.getElementById("thestart").style.display = "none";
+  	// document.getElementById("thestop").style.display = "inline";
   }
-
+  start();
 </script>
 
 </body>
