@@ -21,7 +21,7 @@
 	var background = paper.rect(0,0,"100%","100%");
 	background.attr("fill","yellow");
 	var startButton = paper.circle(150,150,70);
-	startButton.touchstart(start);
+	// startButton.touchstart(start);
 	var score = 0;
 	class Circle {
         constructor(color,x){
@@ -43,7 +43,7 @@
             }
             else if (culoare == "rgb(0, 128, 0)"){
             	// console.log("green");
-            	navigator.vibrate(1000);
+            	navigator.vibrate(100);
             	score--;
             	Wrong.play();
             }
@@ -96,40 +96,55 @@
 	}
 
 	var myVar;
-	function THESTOP(){
-		clearInterval(myVar);
-		startButton = paper.circle(150,150,70);
-		startButton.touchstart(start);
-	  	// document.getElementById("thestart").style.display = "inline";
-	  	// document.getElementById("thestop").style.display = "none";
-	}
-	function start(){
-		startButton.remove();
-	  	intro();
-	  	myVar = window.setInterval(newCerc,3000);
+	// function THESTOP(){
+	// 	clearInterval(myVar);
+	// 	startButton = paper.circle(150,150,70);
+	// 	startButton.touchstart(start);
+	//   	// document.getElementById("thestart").style.display = "inline";
+	//   	// document.getElementById("thestop").style.display = "none";
+	// }
+	// function start(){
+	// 	startButton.remove();
+	// 	title.remove();
+	//   	intro();
+	//   	myVar = window.setInterval(newCerc,3000);
 
-	  	// document.getElementById("thestart").style.display = "none";
-	  	// document.getElementById("thestop").style.display = "inline";
-	}
-	function intro(){
-		var text = '3 2 1 GO!';
-		var textArray = text.split(" ");
-		var len = textArray.length;
-		var timing = 750;
-		for( var index=0; index < len; index++ ) {
-			(function() {
-				var svgTextElement = paper.text(490,500, textArray[index]).attr({ fontSize: '120px', opacity: 0, "text-anchor": "middle" });
-				setTimeout( function() {
-					Snap.animate( 0, 2, function( value ) {
-                    svgTextElement.attr({ 'font-size': value * 100,  opacity: value });
-                	}, timing, mina.bounce, function() { svgTextElement.remove() } );
-                    }
-        		,index * timing)
-    		}());
-		}
-	}
-  	// intro();
- 	// start();
+	//   	// document.getElementById("thestart").style.display = "none";
+	//   	// document.getElementById("thestop").style.display = "inline";
+	// }
+	// function intro(){
+	// 	var text = '3 2 1 GO!';
+	// 	var textArray = text.split(" ");
+	// 	var len = textArray.length;
+	// 	var timing = 750;
+	// 	for( var index=0; index < len; index++ ) {
+	// 		(function() {
+	// 			var svgTextElement = paper.text(490,500, textArray[index]).attr({ fontSize: '120px', opacity: 0, "text-anchor": "middle" });
+	// 			setTimeout( function() {
+	// 				Snap.animate( 0, 2, function( value ) {
+ //                    svgTextElement.attr({ 'font-size': value * 100,  opacity: value });
+ //                	}, timing, mina.bounce, function() { svgTextElement.remove() } );
+ //                    }
+ //        		,index * timing)
+ //    		}());
+	// 	}
+	// }
+ //  	// intro();
+ // 	// start();
+ // 	// ANIMATE TEXT " pUSH TO START"!!!!
+ // 	var title = paper.text(240,180,"Press to start");
+ // 	title.attr({'font-size':100});
+ 	
+ // 	function titleAnim(){
+ // 		title.animate({opacity:0.3},1000,mina.linear,function() {
+ //            title.animate({opacity:1},1000,mina.linear,titleAnim);
+ //       });
+ // 		startButton.animate({opacity:0.3},1000,mina.linear,function() {
+ //            startButton.animate({opacity:1},1000,mina.linear,titleAnim);
+ //       });
+ // 	}
+ // 	titleAnim();
+ 	myVar = window.setInterval(newCerc,2000);
 </script>
 
 </body>
